@@ -45,3 +45,4 @@ crash.log
 .aws/
 manifest.json
 *.pem
+secrets.config

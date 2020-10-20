@@ -10,7 +10,7 @@ mkdir -p /tmp/cookbooks
 cd /tmp/cookbooks
 git clone https://github.com/basas/docker_monitor.git
 cd docker_monitor
-/opt/chef/embedded/bin/berks vendor ../
+/opt/chef/embedded/bin/berks vendor /tmp/cookbooks/
 cd /tmp
 echo '{ "run_list":["docker_monitor::default"] }' > node.json
 chef-client -z -j node.json
