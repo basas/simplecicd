@@ -1,6 +1,7 @@
 #! /bin/bash
 yum update -y
 yum install git -y
+export HOME=/tmp
 cd /tmp
 wget https://packages.chef.io/files/stable/chef/16.6.14/el/7/chef-16.6.14-1.el7.x86_64.rpm
 rpm -ivh chef-16.6.14-1.el7.x86_64.rpm
