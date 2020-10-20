@@ -2,28 +2,31 @@
 pipeline {
     agent any
     environment {
-        POM_VERSION = ''
+        TF_VAR_region = 'eu-central-1'
     }
     stages {
-        stage('stage one') {
+        stage('prepare terraform') {
             steps {
-                script {
-                    tags_extra = "value_1"
-                }
-                echo "tags_extra: ${tags_extra}"
+                echo "Preparing terraform"
+                sh "terraform init"
             }
         }
-        stage('stage two') {
+        stage('Execute TF and create ec2') {
             steps {
-                echo "tags_extra: ${tags_extra}"
+                script {
+                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
+                        accessKeyVariable: 'TF_VAR_access_key', 
+                        secretKeyVariable: 'TF_VAR_secret_key',
+                        credentialsId: 'my-aws-cred-1'
+                    ]]) {
+                        sh "terraform apply -auto-approve -no-color"
+                    }
+                }                
             }
         }
         stage('stage three') {
-            when {
-                expression { tags_extra != 'bla' }
-            }
             steps {
-                echo "tags_extra: ${tags_extra}"
+                echo "Cleanup"
             }
         }
     }
