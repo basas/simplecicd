@@ -71,7 +71,7 @@ resource "aws_instance" "docker_monitoring" {
 
 module "ssh_key_pair" {
   source                = "git::https://github.com/cloudposse/terraform-aws-key-pair.git?ref=master"
-  name                  = "app"
+  name                  = "docker_monitoring_web_server"
   ssh_public_key_path   = "."
   generate_ssh_key      = "true"
   private_key_extension = ".pem"
