@@ -77,3 +77,8 @@ module "ssh_key_pair" {
   private_key_extension = ".pem"
   public_key_extension  = ".pub"
 }
+
+
+output "aws_instance_ip" {
+  value =  "http://${aws_instance.docker_monitoring.public_ip}:3000"
+}

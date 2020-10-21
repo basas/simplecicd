@@ -14,7 +14,7 @@ export PKR_VAR_jenkins_adm_pwd=$(cat secrets.config | grep jenkins_adm_pwd | cut
 
 
 
-#terraform destroy
-#exit
+#terraform plan
+
 
 terraform apply -auto-approve -no-color
